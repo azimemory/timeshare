@@ -1,12 +1,9 @@
-[ng\:cloak], [ng-cloak], .ng-cloak {
-    display: none;
-}
 * {
     box-sizing: border-box;
 }
 html, body {
     margin: 0;
-    background: #222;
+    background: lightsteelblue;
 }
 .app-container {
     border-radius: 4px;
@@ -232,6 +229,7 @@ html, body {
     float: left;
     display: block;
     padding: 40px 30px 30px;
+    margin-bottom: 50px;
     position: relative;
     top: 50px;
     overflow: hidden;
@@ -370,9 +368,8 @@ html, body {
     transition: all 0.15s ease;
 }
 .time {
-    width: calc(100% - 48px);
+    width: 105%;
     position: relative;
-    left: 24px;
     height: 36px;
 }
 .time:after {
