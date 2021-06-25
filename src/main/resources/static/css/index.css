@@ -5,6 +5,12 @@ html, body {
     margin: 0;
     background: lightsteelblue;
 }
+
+.wrap_social_login img {
+    width: 25%;
+    transform: translateX(25px);
+}
+
 .app-container {
     border-radius: 4px;
     overflow: hidden;

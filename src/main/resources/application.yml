@@ -32,7 +32,7 @@ spring:
     security:
       oauth2:
         client:
-          registration: #Spring Security ClientRegistration 참조
+          registration: #SpringSecurity api문서의 ClientRegistration Class 참고
             kakao:
               client-id: e42421bd1a961b7042406b71226f82a5
               client-secret: Cptovk52UXD1rE1WtfmfLMubbikHxOO7
@@ -46,7 +46,7 @@ spring:
               authorization-uri: https://kauth.kakao.com/oauth/authorize
               token-uri: https://kauth.kakao.com/oauth/token
               user-info-uri: https://kapi.kakao.com/v2/user/me
-              user-name-attribute: id
+              user-name-attribute: id  #KAKAO에서 응답해주는 RESOURCE의 속성 중 PRINCIPAL의 userName으로 사용할 속성
 server:
   port: 9797
   servlet:
