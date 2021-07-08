@@ -30,15 +30,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .mvcMatchers(HttpMethod.GET, "/", "/member/login", "/member/join", "/member/idcheck").permitAll()
-                .mvcMatchers(HttpMethod.POST, "/member/mailauth", "/mail", "/member/loginimpl","/member/idcheck").permitAll()
-                .antMatchers("/member/joinimpl/**","/login/oauth2/code/**").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/", "/member/login", "/member/join", "/member/id-check").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/member/mail-auth", "/mail", "/member/login-impl","/member/id-check").permitAll()
+                .antMatchers("/member/join-impl/**","/login/oauth2/code/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login();
 
         http.formLogin()
-                .loginProcessingUrl("/member/loginimpl")
+                .loginProcessingUrl("/member/login-impl")
                 .usernameParameter("userId")
                 .loginPage("/member/login").permitAll()
                 .defaultSuccessUrl("/", true);
