@@ -415,80 +415,6 @@ app.directive('datePicker', function ($timeout, $window) {
                     }
                 });
 
-                scope.timeSelectStart = function (event) {
-                    scope.initializeTimepicker();
-                    var timepicker_container = element.find('.timepicker-container-inner');
-					var timepicker_offset = timepicker_container.offset().left;
-                    if (event.type == 'mousedown') {
-                        scope.xinitial = event.clientX;
-                    } else if (event.type == 'touchstart') {
-                        scope.xinitial = event.originalEvent.touches[0].clientX;
-                    }
-                    scope.moving = true;
-                    scope.currentoffset = scope.xinitial - timepicker_container.offset().left;
-                    scope.totaloffset = scope.xinitial - timepicker_container.offset().left;
-					console.log(timepicker_container.width());
-					if (scope.currentoffset < 0) {
-						scope.currentoffset = 0;
-					} else if (scope.currentoffset > timepicker_container.width()) {
-						scope.currentoffset = timepicker_container.width();
-					}
-					currenttime.css({
-                        transform: 'translateX(' + scope.currentoffset + 'px)',
-                        transition: 'none',
-                        cursor: 'ew-resize',
-                    });
-                    scope.getTime();
-                };
-           
-                angular.element($window).on('mousemove touchmove', function (event) {
-                    if (scope.moving === true) {
-                        event.preventDefault();
-                        if (event.type == 'mousemove') {
-                            scope.offsetx = event.clientX - scope.xinitial;
-                        } else if (event.type == 'touchmove') {
-                            scope.offsetx = event.originalEvent.touches[0].clientX - scope.xinitial;
-                        }
-                        var movex = scope.offsetx + scope.totaloffset;
-                        if (movex >= 0 && movex <= timeline_width) {
-                            currenttime.css({
-                                transform: 'translateX(' + movex + 'px)',
-                            });
-                            scope.currentoffset = movex;
-                        } else if (movex < 0) {
-                            currenttime.css({
-                                transform: 'translateX(0)',
-                            });
-                            scope.currentoffset = 0;
-                        } else {
-                            currenttime.css({
-                                transform: 'translateX(' + timeline_width + 'px)',
-                            });
-                            scope.currentoffset = timeline_width;
-                        }
-                        scope.getTime();
-                        scope.$apply();
-                    }
-                });
-           
-                angular.element($window).on('mouseup touchend', function (event) {
-                    if (scope.moving) {
-                        // var roundsection = Math.round(scope.currentoffset / sectionlength);
-                        // var newoffset = roundsection * sectionlength;
-                        // currenttime.css({
-                        //     transition: 'transform 0.25s ease',
-                        //     transform: 'translateX(' + (newoffset - 1) + 'px)',
-                        //     cursor: 'pointer',
-                        // });
-                        // scope.currentoffset = newoffset;
-                        // scope.totaloffset = scope.currentoffset;
-                        // $timeout(function () {
-                        //     scope.getTime();
-                        // }, 250);
-                    }
-                    scope.moving = false;
-                });
-
                 scope.adjustTime = function (direction) {
                     event.preventDefault();
                     scope.initializeTimepicker();
@@ -520,9 +446,6 @@ app.directive('datePicker', function ($timeout, $window) {
                     scope.getTime();
                 };
             }
-
-            // End Timepicker Code //
-
         }
     };
 });

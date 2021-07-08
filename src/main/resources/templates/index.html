@@ -61,7 +61,7 @@
 				<div ng-class="{'am': timeframe == 'am', 'pm': timeframe == 'pm' }">
 					<div class="timepicker-container-outer" selectedtime="time" timetravel>
 						<div class="timepicker-container-inner">
-							<div class="timeline-container" ng-mousedown="timeSelectStart($event)" sm-touchstart="timeSelectStart($event)">
+							<div class="timeline-container">
 								<div class="current-time">
 									<div class="actual-time">{{ time }}</div>
 								</div>
@@ -72,33 +72,26 @@
 								</div>
 							</div>
 							<div class="display-time">
-								<div class="decrement-time" ng-click="adjustTime('decrease')">
-									<svg width="24" height="24">
-										<path stroke="white" stroke-width="2" d="M8,12 h8"/>
-									</svg>
-								</div>
+
 								<div class="time" ng-class="{'time-active': edittime.active}">
 									<input type="text" class="time-input" ng-model="edittime.input" ng-keydown="changeInputTime($event)" ng-focus="edittime.active = true; edittime.digits = [];" ng-blur="edittime.active = false"/>
 									<div class="formatted-time">{{ edittime.formatted }}</div>
 								</div>
-								<div class="increment-time" ng-click="adjustTime('increase')">
-									<svg width="24" height="24">
-										<path stroke="white" stroke-width="2" d="M12,7 v10 M7,12 h10"/>
-									</svg>
-								</div>
+
 							</div>
 							<div class="am-pm-container">
-								<div class="am-pm-button" ng-click="changetime('am');">am</div>
-								<div class="am-pm-button" ng-click="changetime('pm');">pm</div>
+								<div class="am-pm-button" >am</div>
+								<div class="am-pm-button" >pm</div>
 							</div>
 						</div>
 					</div>
+					<div class="wrap_social_login">
+						<a id="custom-login-btn" href="loginWithKakao()">
+							<img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"	width="222"/>
+						</a>
+						<p id="token-result"></p>
+					</div>
 				</div>
-			</div>
-			
-			<div class="buttons-container">
-				<div class="cancel-button">CANCEL</div>
-				<div class="save-button">SAVE</div>
 			</div>
 		</div>
 	</div>
@@ -106,5 +99,33 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
 <script type="text/javascript" src="/js/index.js"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript">
+	function loginWithKakao() {
+		Kakao.Auth.authorize({
+			redirectUri: 'https://developers.kakao.com/tool/demo/oauth'
+		})
+	}
+	// 아래는 데모를 위한 UI 코드입니다.
+	displayToken()
+	function displayToken() {
+		const token = getCookie('authorize-access-token')
+		if(token) {
+			Kakao.Auth.setAccessToken(token)
+			Kakao.Auth.getStatusInfo(({ status }) => {
+				if(status === 'connected') {
+					document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
+				} else {
+					Kakao.Auth.setAccessToken(null)
+				}
+			})
+		}
+	}
+	function getCookie(name) {
+		const value = "; " + document.cookie;
+		const parts = value.split("; " + name + "=");
+		if (parts.length === 2) return parts.pop().split(";").shift();
+	}
+</script>
 </body>
 </html>

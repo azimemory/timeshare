@@ -11,4 +11,9 @@ public class IndexController {
 		return "/index";
 	}
 
+	@GetMapping("/timetable")
+	public String timetable() {
+		return "/timetable/timetable";
+	}
+
 }
