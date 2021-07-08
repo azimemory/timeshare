@@ -1,0 +1,71 @@
+spring:
+  thymeleaf:
+    cache: false
+  messages:
+    basename: code
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: boot
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: none
+      use-new-id-generator-mappings: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: com.gom.timeshare.config.CustomOracleDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: azimemory@gmail.com
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  security:
+    oauth2:
+      client:
+        registration: #SpringSecurity api문서의 ClientRegistration Class 참고
+          kakao:
+            client-id: e42421bd1a961b7042406b71226f82a5
+            client-secret: Cptovk52UXD1rE1WtfmfLMubbikHxOO7
+            client-name: Kakao
+            client-authentication-method: POST
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            authorization-grant-type: authorization_code
+            scope: profile
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id  #KAKAO에서 응답해주는 RESOURCE의 속성 중 PRINCIPAL의 userName으로 사용할 속성
+server:
+  port: 9797
+  servlet:
+    encoding:
+      enabled: true
+      charset: utf-8
+      force: true
+
+logging:
+  level:
+    root: info
+    org:
+      aparche:
+        tomcat:
+          util:
+            net: WARN
+        hibernate:
+          sql: debug
+        type:
+          descriptor:
+            sql: trace

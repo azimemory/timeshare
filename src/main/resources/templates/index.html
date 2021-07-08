@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -9,7 +10,7 @@
 <div class="app-container" ng-app="dateTimeApp" ng-controller="dateTimeCtrl as ctrl" ng-cloak>
 	<div date-picker
 		 datepicker-title="To Do List"
-		 picktime="true"`u
+		 picktime="true"
 		 pickdate="true"
 		 pickpast="false"
 		 mondayfirst="false"
@@ -85,12 +86,19 @@
 							</div>
 						</div>
 					</div>
-					<div class="wrap_social_login">
-						<a id="custom-login-btn" href="loginWithKakao()">
-							<img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"	width="222"/>
-						</a>
-						<p id="token-result"></p>
-					</div>
+					<th:block sec:authorize="!isAuthenticated()">
+						<div class="wrap_social_login">
+							<a id="custom-login-btn" href="/oauth2/authorization/kakao">
+								<img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"/>
+							</a>
+							<p id="token-result"></p>
+						</div>
+					</th:block>
+					<th:block sec:authorize="isAuthenticated()">
+						<div class="wrap_social_login">
+							<div>[[${#authentication.principal}]]</div>
+						</div>
+					</th:block>
 				</div>
 			</div>
 		</div>
@@ -99,33 +107,24 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
 <script type="text/javascript" src="/js/index.js"></script>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script type="text/javascript">
-	function loginWithKakao() {
-		Kakao.Auth.authorize({
-			redirectUri: 'https://developers.kakao.com/tool/demo/oauth'
-		})
-	}
-	// 아래는 데모를 위한 UI 코드입니다.
-	displayToken()
-	function displayToken() {
-		const token = getCookie('authorize-access-token')
-		if(token) {
-			Kakao.Auth.setAccessToken(token)
-			Kakao.Auth.getStatusInfo(({ status }) => {
-				if(status === 'connected') {
-					document.getElementById('token-result').innerText = 'login success. token: ' + Kakao.Auth.getAccessToken()
-				} else {
-					Kakao.Auth.setAccessToken(null)
-				}
-			})
+<th:block th:insert="fragments :: flg_firebase"/>
+<script>
+	// [START messaging_get_token]
+	// Get registration token. Initially this makes a network call, once retrieved
+	// subsequent calls to getToken will return from cache.
+	const messaging = firebase.messaging();
+	messaging.getToken({ vapidKey: 'BCoQudJnRjWkUxzjSQC9pV-tGdOMGRc30VOaDyJPspjZ0wRFHm5CMeCGYMWl8vXBHMF3dUnby3Q1UNrreQDkvnQ' }).then((currentToken) => {
+		if (currentToken) {
+
+		} else {
+			// Show permission request UI
+			console.log('No registration token available. Request permission to generate one.');
 		}
-	}
-	function getCookie(name) {
-		const value = "; " + document.cookie;
-		const parts = value.split("; " + name + "=");
-		if (parts.length === 2) return parts.pop().split(";").shift();
-	}
+	}).catch((err) => {
+		console.log('An error occurred while retrieving token. ', err);
+	});
+	// [END messaging_get_token]
+
 </script>
 </body>
 </html>
