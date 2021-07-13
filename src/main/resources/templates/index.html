@@ -2,9 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link href="/css/index.css" rel="stylesheet"/>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="/css/index.css" rel="stylesheet"/>
 </head>
 <body>
 <div class="app-container" ng-app="dateTimeApp" ng-controller="dateTimeCtrl as ctrl" ng-cloak>
@@ -17,7 +17,7 @@
 		 custom-message=""
 		 selecteddate="ctrl.selected_date"
 		 updatefn="ctrl.updateDate(newdate)">
-	
+
 		<div class="datepicker"
 			 ng-class="{
 				'am': timeframe == 'am',
@@ -47,11 +47,11 @@
 				</div>
 				<div class="calendar-grid" ng-class="{false: 'no-hover'}[pickdate]">
 					<div
-						ng-class="{'no-hover': !day.showday}"
-						ng-repeat="day in month"
-						class="datecontainer"
-						ng-style="{'margin-left': calcOffset(day, $index)}"
-						track by $index>
+							ng-class="{'no-hover': !day.showday}"
+							ng-repeat="day in month"
+							class="datecontainer"
+							ng-style="{'margin-left': calcOffset(day, $index)}"
+							track by $index>
 						<div class="datenumber" ng-class="{'day-selected': day.selected }" ng-click="selectDate(day)">
 							{{ day.daydate }}
 						</div>
@@ -104,10 +104,11 @@
 		</div>
 	</div>
 </div>
-<th:block th:insert="fragments :: flg_firebase"/>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
 <script type="text/javascript" src="/js/index.js"></script>
+<script type="module" src="/js/firebase/firebase-init.js"></script>
+
 
 
 </body>

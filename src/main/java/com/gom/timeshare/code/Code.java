@@ -6,14 +6,14 @@ public enum Code {
     EMAIL("killsky2014@naver.com"),
     UPLOAD("C:\\CODE\\afternoon\\E_SERVLET\\resources\\upload\\"),
     FIREBASE_SEND_PUSH("https://fcm.googleapis.com/v1/parent=projects/timetable-for-hyeon/messages:send");
-    public String desc;
+    public final String DESC;
 
     Code(String desc){
-        this.desc = desc;
+        this.DESC = desc;
     }
 
     public String toString() {
-        return desc;
+        return DESC;
     }
 }
 

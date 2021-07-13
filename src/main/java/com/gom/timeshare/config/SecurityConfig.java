@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public SpringSecurityDialect springSecurityDialect(){
-        return new SpringSecurityDialect();
+        return new SpringSecurityDialect(); //thymeleaf에서 시큐리티에 접근하기 위해 사용
     }
 
     @Override  //WebSecurity는 FilterChainProxy를 생성하는 필터입니다.
