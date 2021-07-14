@@ -26,6 +26,7 @@ messaging.getToken({ vapidKey: 'BCoQudJnRjWkUxzjSQC9pV-tGdOMGRc30VOaDyJPspjZ0wRF
     console.log('An error occurred while retrieving token. ', err);
 });
 
+
 /*
 백그라운드로 푸시가 발송되면 알림을 띄운다.
 messaging.onBackgroundMessage((payload) => {
