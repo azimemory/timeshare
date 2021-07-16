@@ -1,4 +1,4 @@
-package com.gom.timeshare.code;
+package com.gom.timeshare.common.code;
 
 
 public enum Code {

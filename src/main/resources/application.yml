@@ -6,7 +6,7 @@ spring:
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:xe
-    username: boot
+    username: timeshare
     password: 1234
   jpa:
     hibernate:
@@ -15,7 +15,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        dialect: com.gom.timeshare.config.CustomOracleDialect
+        dialect: com.gom.timeshare.common.config.db.CustomOracleDialect
         jdbc:
           lob:
             non_contextual_creation: true

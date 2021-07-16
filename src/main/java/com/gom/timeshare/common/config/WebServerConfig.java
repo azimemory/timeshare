@@ -1,4 +1,4 @@
-package com.gom.timeshare.config;
+package com.gom.timeshare.common.config;
 
 import org.springframework.boot.web.server.MimeMappings;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;

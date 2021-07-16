@@ -1,6 +1,6 @@
-package com.gom.timeshare.fcmpush.firebase;
+package com.gom.timeshare.common.firebase;
 
-import com.gom.timeshare.code.Code;
+import com.gom.timeshare.common.code.Code;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;

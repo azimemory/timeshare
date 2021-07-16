@@ -1,4 +1,4 @@
-package com.gom.timeshare.config;
+package com.gom.timeshare.common.config.security;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .oauth2Login();
+
 
         http.formLogin()
                 .loginProcessingUrl("/member/login-impl")
